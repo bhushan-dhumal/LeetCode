@@ -1,0 +1,23 @@
+https://leetcode.com/problems/middle-of-the-linked-list/
+=========================================================
+
+cpp
+---
+class Solution {
+public:
+    ListNode* middleNode(ListNode* head) {
+        ListNode* slowNode = head;
+        ListNode* fastNode = head;
+        
+        while(fastNode->next != NULL)
+        {
+            slowNode = slowNode->next;
+            fastNode = fastNode->next;
+            if(fastNode->next != NULL)
+            {
+                fastNode = fastNode->next;
+            }
+        }
+        return slowNode;
+    }
+};
