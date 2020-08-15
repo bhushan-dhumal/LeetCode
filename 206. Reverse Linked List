@@ -1,0 +1,27 @@
+https://leetcode.com/problems/reverse-linked-list/
+===================================================
+
+C++
+----
+
+Iterative Approch
+------------------
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        
+        ListNode* curr = head;
+        ListNode* prev = nullptr;
+        ListNode* next = nullptr;
+        while(curr)
+        {
+            next = curr->next;
+            curr->next = prev;
+            prev = curr;
+            curr = next;
+        }
+        head = prev;
+        return head;
+    }
+};
+
