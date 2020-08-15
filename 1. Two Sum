@@ -1,0 +1,46 @@
+https://leetcode.com/problems/two-sum/
+=======================================
+
+C++
+---
+
+Brute Force Approch
+-------------------
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> res;
+        int sum;
+        for(int i =0; i< nums.size();i++)
+        {
+            sum = target-nums[i];
+            for(int j = i+1;j<nums.size();j++)
+            {
+                if(nums[j]==sum)
+                {
+                    res.push_back(i);
+                    res.push_back(j);
+                    break;
+                }
+            }
+        }
+        return res; 
+    }
+};
+
+Hash Table
+-----------
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> umap;
+        for(int i =0;i<nums.size();i++)
+        {
+            if(umap.find(target-nums[i]) != umap.end())
+                return vector<int> { umap[target-nums[i]],i};
+            umap[nums[i]]=i;
+        }
+        return vector<int>{}; 
+    }
+};
+
