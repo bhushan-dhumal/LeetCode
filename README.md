@@ -1,6 +1,6 @@
 # LeetCode
 
-The initiation took by Faraz Khan and cooperated by Bhushan, Sanket, Suraj. Below are few words by Initiator :)
+The initiation took by Faraz Khan and cooperated by Anirudh,Bhushan, Sanket, Suraj,Swapnil. Below are few words by Initiator :)
 ****
 Hey guys, planning to prep algorithm and problem-solving?
 
