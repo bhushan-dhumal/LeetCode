@@ -1,0 +1,20 @@
+https://leetcode.com/problems/maximum-subarray/
+========================================================
+
+Java Solution
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+        int max_last = Integer.MIN_VALUE, max_till = 0;
+        for(int i=0; i<nums.length; i++){
+            max_till = max_till + nums[i];               
+            if (max_last < max_till){ 
+                max_last = max_till;                 
+            }
+            if (max_till < 0) {
+               max_till = 0; 
+            }
+        }
+        return max_last;
+    }
+}
