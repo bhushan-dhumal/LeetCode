@@ -1,0 +1,25 @@
+
+c++ (not optimised, almost equal to liner, need to find log n complexity)
+-----------------------------------------------------------------------------
+
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        if(nums.size() == 0) return -1;
+
+        int start = 0;
+        int end = nums.size()-1;
+        while(start<=end)
+        {
+        if(nums[start] == target )
+            return start;
+        if(nums[end] == target)
+            return end;
+        if(nums[start] > target && nums[end] < target)
+            return -1;
+        start++;
+        end--;
+        }
+        return -1;
+    }
+};
