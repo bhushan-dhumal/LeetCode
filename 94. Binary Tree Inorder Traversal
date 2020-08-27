@@ -1,0 +1,96 @@
+https://leetcode.com/problems/binary-tree-inorder-traversal/
+--------------------------------------------------------------
+
+c++(Iterative)
+----
+/**
+ * Definition for a binary tree node.
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+ *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+ * };
+ */
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        vector<TreeNode*> st;
+        TreeNode* curr = root;
+        while(curr != nullptr || !st.empty())
+        {
+            while(curr!= nullptr)
+            {
+                st.push_back(curr);
+                curr = curr->left;
+            }
+            curr = st.back();
+            res.push_back(curr->val);
+            curr = curr->right;
+            st.pop_back();
+        }
+        
+        return res;
+    }
+};
+
+c++(Recursive)
+---------------
+
+class Solution {
+public:
+    vector<int> inorderTraversal(TreeNode* root) {
+        vector<int> res;
+        inorder(res,root);
+        return res;
+        
+    }
+    void inorder(vector<int>& ip,TreeNode* root){
+        if(!root) return;
+        if(root->left)
+            inorder(ip,root->left);
+        ip.push_back(root->val);
+        if(root->right)
+            inorder(ip,root->right);
+        
+    }
+};
+
+python3(Iterative)
+------------------
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+class Solution:
+
+            
+    def inorderTraversal(self, root: TreeNode) -> List[int]:
+        res = []
+        self.inorder(root,res)
+        return res
+    
+    def inorder(self,root,listToAdd):
+        curr = root
+        l = []
+        done = 0
+        while True:
+            if curr:
+                l.append(curr)
+                curr = curr.left
+            elif l:
+                curr = l.pop()
+                listToAdd.append(curr.val)
+                curr = curr.right
+            else:
+                break
+
+            
+       
+
