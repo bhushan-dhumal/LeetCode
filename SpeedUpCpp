@@ -4,3 +4,13 @@ put below code inside method
         int i = [ ] ( ) {
 std::ios::sync_with_stdio(false); std::cin.tie(nullptr); return 0;
 }();
+
+
+OR
+auto optimize_cpp_stdio = []() {
+    std::ios::sync_with_stdio(false);
+    std::cin.tie(nullptr);
+    std::cout.tie(nullptr);
+    std::setvbuf(stdout, nullptr, _IOFBF, BUFSIZ);
+    return 0;
+}();
