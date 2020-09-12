@@ -1,0 +1,93 @@
+https://leetcode.com/problems/partition-labels/
+------------------------------------------------
+
+c++(first own attempt)
+-----------------------
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        vector<vector<int>> a(26,vector<int>());
+        vector<int> res;
+            
+        for(int i =0;i<S.size();i++)
+        {
+            int idx = S[i] - 'a';
+            a[idx].push_back(i);
+        }
+
+        for(int i =0;i<S.size();i++)
+        {
+            int idx = S[i] - 'a';
+            if(res.empty())
+            {
+                res.push_back(a[idx].back());
+            }
+            else if(res.back() < a[idx].back())
+            {
+                int j;
+                bool found = false;
+                for(int j =0;j<a[idx].size()-1;j++)
+                {
+                    if(res.back() > a[idx][j])
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+                if(found)
+                    res[res.size()-1] = a[idx].back();
+                else
+                    res.push_back(a[idx].back());
+
+            }
+
+        }
+        for(int i = res.size()-1;i > 0;i--)
+        {
+            res[i] = res[i]- res[i-1];
+        }
+        res[0] = res[0]+1;
+        return res;
+    }
+};
+
+c++(2nd attempt by seeing solution)
+----------------------------------
+explaination : https://www.youtube.com/watch?v=kS4P0vXbGmc
+-----------------------------------------------------------
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        vector<vector<int>> a(26,vector<int>());
+        vector<int> res,end_idx(26);
+        for(int i = 0;i<S.size();i++)
+            end_idx[S[i]-'a'] = i;
+        int start=0,end=0;
+        for(int i = 0;i<S.size();i++)
+        {
+            end = max(end,end_idx[S[i]-'a']);
+            if(end == i)
+            {
+                res.push_back(end-start+1);
+                start = end+1;
+            } 
+        }
+        
+        return res;
+    }
+};
+
+python3
+-------
+class Solution:
+    def partitionLabels(self, S: str) -> List[int]:
+        end_idx = {letter: i for i,letter in enumerate(S)}
+        start,end =0,0
+        res = []
+        for i,letter in enumerate(S):
+            end = max(end,end_idx[letter] )
+            if(end == i):
+                res.append(end-start+1)
+                start = end+1;
+        return res
+            
