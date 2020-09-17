@@ -1,0 +1,21 @@
+https://leetcode.com/problems/generate-parentheses/
+
+C++
+----
+
+class Solution {
+    vector<string> res;
+public:
+    vector<string> generateParenthesis(int n) 
+    {
+        generateParanthesis("",n,n);
+        return res;
+        
+    }
+    void generateParanthesis(string str, int open, int close)
+    {
+        if(open)         generateParanthesis(str+'(', open-1, close);
+        if(close > open) generateParanthesis(str+')', open, close-1);
+        if(!close)       res.push_back(str);
+    }
+};
