@@ -1,0 +1,48 @@
+https://leetcode.com/problems/permutations/
+
+
+Reference:https://www.geeksforgeeks.org/write-a-c-program-to-print-all-permutations-of-a-given-string/
+
+c++
+---
+class Solution {
+public:
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> res;
+        permute(nums,0,res);
+        return res;        
+    }
+    void permute(vector<int>& nums, int begin,vector<vector<int>>& res)
+    {
+        if(begin==nums.size()-1)
+        {
+            res.push_back(nums);
+            return;
+        }
+            
+        for(int i =begin;i< nums.size();i++)
+        {
+            swap(nums[begin],nums[i]);
+            permute(nums,begin+1,res);
+            swap(nums[begin],nums[i]);
+        }         
+    }
+};
+
+python
+-------
+class Solution:
+    def permute(self, nums: List[int]) -> List[List[int]]:
+        res = []
+        self.permuteRec(nums,0,res)
+        return res
+    
+    def permuteRec(self,a, begin, res): 
+        if begin==len(a)-1: 
+            res.append(list(a))
+            return
+        
+        for i in range(begin,len(a)): 
+            a[begin], a[i] = a[i], a[begin] 
+            self.permuteRec(a, idx+1,res)
+            a[begin], a[i] = a[i], a[begin]
