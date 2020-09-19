@@ -46,3 +46,58 @@ public:
         
     }
 };
+
+c++ (better approch)
+---
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {
+        if(n == 0)return tasks.size();
+        int freq[26] = {0};
+        for(char ch: tasks)
+            freq[ch-'A'] += 1;
+        
+        sort(freq,freq+26);
+        
+        int most = freq[25]-1; //max freq element at last;
+        int idle = (most)*n;
+        
+        for(int i=24;i>=0;i--)
+        {
+            idle -= min(most,freq[i]);
+            if(idle <= 0)return tasks.size();
+        }
+        return idle+tasks.size();
+    }
+};
+
+c++
+---
+
+class Solution {
+public:
+    int leastInterval(vector<char>& tasks, int n) {        
+        int freq[26];
+        memset(freq,0,sizeof(freq));
+        int highest_freq = 0;
+        for(const char ch : tasks)
+        {
+            freq[ch -'A']++;
+            highest_freq = max(highest_freq,freq[ch -'A']);
+            
+        }
+        
+        int tasks_with_highest_freq = 0;
+        for(int i =0;i<26;i++)
+        {
+            if(freq[i] == highest_freq)
+                tasks_with_highest_freq++;
+        }
+        
+        int idleSpots = (highest_freq-1)*(n+1);
+        int ts = tasks.size();
+        return max(ts,(idleSpots+ tasks_with_highest_freq));
+        
+    }
+};
