@@ -1,0 +1,56 @@
+https://leetcode.com/problems/remove-nth-node-from-end-of-list/
+
+
+C++
+----
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+
+// Own attempt
+class Solution {
+public:
+    ListNode* removeNthFromEnd(ListNode* head, int n) 
+    {
+        ListNode* end = head;
+        while(--n!=0)
+        {
+            end = end->next;
+        }
+        if(print) cout<<"end is "<<end->val<<endl;
+        ListNode* prev = head;
+        end = end->next;
+        while(end && end->next)
+        {
+            end = end->next;
+            prev = prev->next;
+        }
+        if(prev != head || end)
+        {
+            // if prev is not head then prev is valid
+            // if link list has valid end and prev is pointing to head then prev is pointing to correct value
+            if(print) cout<<"prev is "<<prev->val<<endl;
+            ListNode* curr = prev->next;
+            prev->next = curr->next;
+            curr->next = nullptr;
+        }
+        else
+        {
+            // if prev is head but end is invalid then prev is incorrect
+            // we should just change head to next and make head/prev's next invalid
+            head = head->next;
+            prev->next = nullptr;
+        }
+      
+        return head;
+        
+    }
+    bool print = false;
+};
